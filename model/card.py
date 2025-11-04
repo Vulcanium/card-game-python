@@ -15,6 +15,7 @@ RANKS = (
     "ace"
     )
 
+
 class Card:
     """Card class.
 

@@ -1,4 +1,5 @@
-from hand import Hand
+from .hand import Hand
+
 
 class Player:
     """Player."""

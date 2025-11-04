@@ -1,6 +1,7 @@
 from collections import UserList
 
-from card import Card
+from .card import Card
+
 
 class Hand(UserList):
     """Player hand."""

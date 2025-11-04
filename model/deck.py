@@ -2,7 +2,8 @@ import random
 
 from collections import UserList
 
-from card import RANKS, SUITS, Card
+from .card import RANKS, SUITS, Card
+
 
 class Deck(UserList):
     """Deck of cards."""
