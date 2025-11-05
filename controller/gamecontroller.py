@@ -1,25 +1,25 @@
-"""Define the main controller."""
+"""Define the game controller."""
 
 from typing import List
 
 from model.deck import Deck
 from model.player import Player
-from view.commandlineview import CommandLineView
-from games.gameevaluator import GameEvaluator
+from view.views import Views
+from controller.gameevaluator import GameEvaluator
 
 MAXIMUM_PLAYERS = 5
 
 
 class GameController:
-    """Main controller."""
+    """Game controller."""
 
     def __init__(
             self, 
             deck: Deck, 
-            view: CommandLineView, 
+            view: Views, 
             game_evaluator: GameEvaluator
             ):
-        """Has a deck, a list of players and a view."""
+        """Has a deck, a list of players, a view and an evaluator."""
 
         # Models
         self.players: List[Player] = []

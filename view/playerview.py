@@ -1,8 +1,8 @@
-"""Command line view."""
+"""Define the player view."""
 
 
-class CommandLineView:
-    """Card game view."""
+class PlayerView:
+    """Card game player view."""
         
     def prompt_for_player(self):
         """Prompt for a player name."""

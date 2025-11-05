@@ -1,19 +1,28 @@
 """Entry point."""
 
 from model.deck import Deck
-from view.commandlineview import CommandLineView
+from view.playerview import PlayerView
+from view.broadcastview import BroadcastView
+from view.internetstreamingview import InternetStreamingView
+from view.views import Views
 from controller.gamecontroller import GameController
-from games.highcardgameevaluator import HighCardGameEvaluator
-from games.lowcardgameevaluator import LowCardGameEvaluator
+from controller.highcardgameevaluator import HighCardGameEvaluator
+from controller.lowcardgameevaluator import LowCardGameEvaluator
 
 
 def main():
+    # Prepare useful variables
+    deck = Deck()
+    active_view = PlayerView()
+    passive_views = (BroadcastView(), InternetStreamingView())
+    views = Views(active_view, passive_views)
+
     # The player with the highest card wins
-    game = GameController(Deck(), CommandLineView(), HighCardGameEvaluator())
+    game = GameController(deck, views, HighCardGameEvaluator())
     game.run()
 
     # The player with the lowest card wins
-    # game = GameController(Deck(), CommandLineView(), LowCardGameEvaluator())
+    # game = GameController(deck, views, LowCardGameEvaluator())
     # game.run()
 
 
