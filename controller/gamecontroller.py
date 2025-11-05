@@ -5,6 +5,7 @@ from typing import List
 from model.deck import Deck
 from model.player import Player
 from view.commandlineview import CommandLineView
+from games.gameevaluator import GameEvaluator
 
 MAXIMUM_PLAYERS = 5
 
@@ -12,7 +13,12 @@ MAXIMUM_PLAYERS = 5
 class GameController:
     """Main controller."""
 
-    def __init__(self, deck: Deck, view: CommandLineView):
+    def __init__(
+            self, 
+            deck: Deck, 
+            view: CommandLineView, 
+            game_evaluator: GameEvaluator
+            ):
         """Has a deck, a list of players and a view."""
 
         # Models
@@ -21,6 +27,9 @@ class GameController:
 
         # View
         self.view = view
+
+        # Evaluator
+        self.game_evaluator = game_evaluator
 
     def get_players(self):
         """Get some players."""
@@ -45,19 +54,7 @@ class GameController:
 
     def evaluate_game(self):
         """Evaluate the best player."""
-        previous_player = self.players[0]
-        best_candidate = self.players[0]
-
-        for player in self.players[1:]:
-            player_card = player.hand[0]
-            last_player_card = previous_player.hand[0]
-
-            if player_card > last_player_card:
-                best_candidate = player
-
-            previous_player = player
-
-        return best_candidate.name
+        return self.game_evaluator.evaluate_winner(self.players)
 
     def rebuild_deck(self):
         """Rebuild the deck."""
@@ -68,7 +65,6 @@ class GameController:
                 self.deck.append(card)
                 
         self.deck.shuffle()
-
 
     def run(self):
         """Run the game."""
